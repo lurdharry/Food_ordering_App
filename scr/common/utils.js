@@ -7,10 +7,10 @@ import {
 const CustomHeight = 812 - 44;
 const CustomWidth = 375;
 
-const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})');
-const mediumRegex = new RegExp(
-  '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-);
+// const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})');
+// const mediumRegex = new RegExp(
+//   '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
+// );
 
 export const hp = value => {
   const dimension = (value / CustomHeight) * 100;
@@ -53,28 +53,28 @@ export const toMoney = num => {
 //   return accounting.formatMoney(amount, '', 2);
 // };
 
-export const passwordIndicator = password => {
-  if (!password.length) return '';
-  if (strongRegex.test(password)) {
-    return 'Strong Password';
-  }
-  if (mediumRegex.test(password)) {
-    return 'Medium Password';
-  }
-  return 'Weak Password';
-};
+// export const passwordIndicator = password => {
+//   if (!password.length) return '';
+//   if (strongRegex.test(password)) {
+//     return 'Strong Password';
+//   }
+//   if (mediumRegex.test(password)) {
+//     return 'Medium Password';
+//   }
+//   return 'Weak Password';
+// };
 
-const emailValidator = email => {
-  const re = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-};
+// const emailValidator = email => {
+//   const re = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//   return re.test(email);
+// };
 
-export const validateEmail = email => {
-  if (emailValidator(email)) {
-    return true;
-  }
-  return false;
-};
+// export const validateEmail = email => {
+//   if (emailValidator(email)) {
+//     return true;
+//   }
+//   return false;
+// };
 
 export const absolute = value => {
   return Math.abs(value).toString();
