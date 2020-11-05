@@ -1,4 +1,9 @@
+import React from 'react';
+import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import {onboard1, onboard2, onboard3} from '../../../assets/images';
+import {FaceBook, Google} from '../../../assets/icons.svg/icon_svg';
+import {wp, hp} from '../../common';
+import * as Colors from '../../common/colors';
 
 export const intoSlides = [
   {
@@ -22,3 +27,30 @@ export const intoSlides = [
     image: onboard3,
   },
 ];
+
+export const SocialLogin = ({googleOnpress, fbOnpress}) => (
+  <View style={styles.socialContainer}>
+    <TouchableOpacity style={styles.iconContainer} onPress={googleOnpress}>
+      <Google />
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.iconContainer} onPress={fbOnpress}>
+      <FaceBook />
+    </TouchableOpacity>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  socialContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  iconContainer: {
+    width: wp(148),
+    height: hp(56),
+    borderRadius: hp(16),
+    backgroundColor: Colors.LightGrey,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
