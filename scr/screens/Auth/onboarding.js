@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, Image, SafeAreaView} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {BoldText, RegularText, hp, wp} from '../../common';
+import {BoldText, RegularText, hp, wp, Button} from '../../common';
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 import {onboard1, onboard2, onboard3} from '../../../assets/images';
@@ -29,29 +36,63 @@ const data = [
   },
 ];
 class Onboarding extends Component {
-  _renderItems = ({item}) => (
+  state = {
+    state: 0,
+  };
+
+  _renderItems = ({item, index}) => (
     <View style={styles.itemView}>
       <Image
         source={item.image}
         resizeMode="contain"
         style={{height: hp(233), width: wp(320)}}
       />
-      <BoldText title={item.title} />
+      <BoldText title={item.title} style={styles.title} />
       <RegularText title={item.subtitle} style={styles.subtitle} />
     </View>
   );
 
+  handleOnpress = () => {
+    this.setState(
+      prevState => ({
+        state: prevState.state + 1,
+      }),
+      () => {
+        if (this.state.state <= 2) {
+          this.slider.goToSlide(this.state.state, true);
+        }
+      },
+    );
+  };
+  renderText = () => {
+    if (this.state.state < 2) {
+      return 'Next';
+    }
+    return 'Get Started';
+  };
+
+  onSlideChange = (start, end) => {
+    this.setState({state: start});
+  };
+
   render() {
     return (
-      <>
-        <Text>dgdgd</Text>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.skipView}>
+          <RegularText title="Skip" style={styles.skipText} />
+        </TouchableOpacity>
         <AppIntroSlider
           data={data}
+          ref={ref => (this.slider = ref)}
           renderItem={this._renderItems}
-          showNextButton={false}
-          showDoneButton={false}
+          dotStyle={styles.dotStyle}
+          activeDotStyle={styles.activeDotStyle}
+          onSlideChange={this.onSlideChange}
         />
-      </>
+        <View style={{bottom: hp(50), alignSelf: 'center', marginTop: hp(40)}}>
+          <Button title={this.renderText()} onPress={this.handleOnpress} />
+        </View>
+      </View>
     );
   }
 }
@@ -59,6 +100,40 @@ class Onboarding extends Component {
 export default Onboarding;
 
 const styles = StyleSheet.create({
+  buttonCircle: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'rgba(0, 0, 0, .2)',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dotStyle: {
+    height: hp(10),
+    width: hp(10),
+    borderRadius: hp(5),
+    backgroundColor: Colors.dotColor,
+    // opacity: 0.2,
+  },
+  activeDotStyle: {
+    height: hp(10),
+    width: hp(10),
+    borderRadius: hp(5),
+    backgroundColor: Colors.Purple,
+  },
+  skipText: {
+    color: Colors.LightPurple,
+    fontSize: hp(16),
+  },
+  skipView: {
+    position: 'absolute',
+    top: hp(20),
+    right: wp(24),
+  },
+  container: {
+    flex: 1,
+    backgroundColor: Colors.White,
+  },
   itemView: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -70,5 +145,10 @@ const styles = StyleSheet.create({
     lineHeight: hp(24),
     marginHorizontal: wp(50),
     marginTop: hp(16),
+    fontSize: hp(14),
+  },
+  title: {
+    marginTop: hp(40),
+    fontSize: hp(20),
   },
 });
