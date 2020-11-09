@@ -6,9 +6,10 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {BoldText, RegularText, hp, wp, Button} from '../../common';
+import {BoldText, RegularText, hp, wp, Button, navigate} from '../../common';
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 import {onboard1, onboard2, onboard3} from '../../../assets/images';
@@ -53,16 +54,18 @@ class Onboarding extends Component {
   );
 
   handleOnpress = () => {
-    this.setState(
-      prevState => ({
-        state: prevState.state + 1,
-      }),
-      () => {
-        if (this.state.state <= 2) {
-          this.slider.goToSlide(this.state.state, true);
-        }
-      },
-    );
+    if (this.state.state < 2) {
+      this.setState(
+        prevState => ({
+          state: prevState.state + 1,
+        }),
+        () => {
+          if (this.state.state <= 2) {
+            this.slider.goToSlide(this.state.state, true);
+          }
+        },
+      );
+    } else navigate(this, 'login');
   };
   renderText = () => {
     if (this.state.state < 2) {
@@ -77,22 +80,29 @@ class Onboarding extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.skipView}>
-          <RegularText title="Skip" style={styles.skipText} />
-        </TouchableOpacity>
-        <AppIntroSlider
-          data={data}
-          ref={ref => (this.slider = ref)}
-          renderItem={this._renderItems}
-          dotStyle={styles.dotStyle}
-          activeDotStyle={styles.activeDotStyle}
-          onSlideChange={this.onSlideChange}
-        />
-        <View style={{bottom: hp(50), alignSelf: 'center', marginTop: hp(40)}}>
-          <Button title={this.renderText()} onPress={this.handleOnpress} />
+      <>
+        <StatusBar backgroundColor={Colors.White} barStyle="dark-content" />
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.skipView}
+            hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
+            onPress={() => navigate(this, 'login')}>
+            <RegularText title="Skip" style={styles.skipText} />
+          </TouchableOpacity>
+          <AppIntroSlider
+            data={data}
+            ref={ref => (this.slider = ref)}
+            renderItem={this._renderItems}
+            dotStyle={styles.dotStyle}
+            activeDotStyle={styles.activeDotStyle}
+            onSlideChange={this.onSlideChange}
+          />
+          <View
+            style={{bottom: hp(50), alignSelf: 'center', marginTop: hp(40)}}>
+            <Button title={this.renderText()} onPress={this.handleOnpress} />
+          </View>
         </View>
-      </View>
+      </>
     );
   }
 }
@@ -129,6 +139,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: hp(20),
     right: wp(24),
+    zIndex: 100,
   },
   container: {
     flex: 1,

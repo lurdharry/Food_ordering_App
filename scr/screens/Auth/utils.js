@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: wp(327),
   },
   iconContainer: {
     width: wp(148),
