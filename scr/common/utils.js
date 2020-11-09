@@ -79,3 +79,7 @@ export const toMoney = num => {
 export const absolute = value => {
   return Math.abs(value).toString();
 };
+
+export const navigate = (This, ...args) => {
+  This.props.navigation.navigate(...args);
+};
