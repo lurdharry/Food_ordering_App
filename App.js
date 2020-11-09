@@ -1,15 +1,13 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {StatusBar} from 'react-native';
-import * as Colors from './scr/common/colors';
-
-import Onboarding from './scr/screens/Auth/onboarding';
+import {NavigationContainer} from '@react-navigation/native';
+import Navigation from './scr/screens/navigation';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.White} />
-      <Onboarding />
-    </>
+    <NavigationContainer>
+      <Navigation />
+    </NavigationContainer>
   );
 };
 
