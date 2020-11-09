@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
-import {RegularText, BoldText, SemiBoldText, MediumText} from './text';
+import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {RegularText, MediumText} from './text';
 import {hp, wp} from './utils';
 import * as Colors from './colors';
+import {
+  PasswordEyeSvg,
+  ClosedPasswordEyeSvg,
+  VerifiedSvg,
+} from '../../assets/icons.svg/icon_svg';
 
 /**
  *
@@ -33,9 +38,11 @@ const Input = ({
   placeholderTextColor,
   noBorder,
   customInputStyle,
+  isPass = false,
   ...rest
 }) => {
   const [isInFocus, setFocus] = useState(false);
+  const [secure, setSecure] = useState(false);
   const handleFocus = () => {
     if (onFocus) {
       onFocus();
@@ -47,6 +54,10 @@ const Input = ({
       onBlur();
     }
     setFocus(false);
+  };
+
+  const handleIconPress = () => {
+    if (value.length) setSecure(!secure);
   };
   return (
     <View style={inputContainerStyle}>
@@ -82,15 +93,20 @@ const Input = ({
           onChangeText={onChangeText}
           placeholderTextColor={placeholderTextColor || Colors.Black}
           onFocus={handleFocus}
+          secureTextEntry={secure}
           onBlur={handleBlur}
           returnKeyType="done"
         />
-        {isValid && (
+        {isValid && !isPass && (
           <View style={styles.icon}>
             <VerifiedSvg />
           </View>
         )}
-        {rightIcon && <View style={styles.icon}>{rightIcon}</View>}
+        {isPass && (
+          <TouchableOpacity onPress={handleIconPress} style={styles.icon}>
+            {secure ? <ClosedPasswordEyeSvg /> : <PasswordEyeSvg />}
+          </TouchableOpacity>
+        )}
       </View>
       {error ? (
         <RegularText title={error} style={[styles.errorMessage, errorStyle]} />
@@ -100,6 +116,12 @@ const Input = ({
 };
 
 const styles = StyleSheet.create({
+  blackCircle: {
+    height: hp(10),
+    width: hp(10),
+    marginRight: wp(12),
+    borderRadius: hp(5),
+  },
   container: {
     flex: 1,
   },

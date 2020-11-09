@@ -12,7 +12,17 @@ import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 
 class Login extends Component {
+  state = {
+    email: '',
+    password: '',
+  };
+
+  handleChange = (state, value) => {
+    this.setState({[state]: value});
+  };
+
   render() {
+    const {email, password} = this.state;
     return (
       <>
         <StatusBar backgroundColor={Colors.White} barStyle="dark-content" />
@@ -23,16 +33,21 @@ class Login extends Component {
           <RegularText title="or Login with Email" style={styles.email} />
           <TextInput
             label="Email"
-            value="shs"
+            value={email}
             noBorder
+            placeholder="Input Email"
             inputContainerStyle={styles.emailInput}
+            onChangeText={value => this.handleChange('email', value)}
           />
           <TextInput
             label="Password"
-            value="shs"
+            value={password}
+            placeholder="Input Password"
             noBorder
             inputContainerStyle={styles.emailInput}
             labelStyle={styles.passwordLabel}
+            isPass
+            onChangeText={value => this.handleChange('password', value)}
           />
           <View style={{marginTop: hp(60)}}>
             <Button title="Sign In" onPress={this.handleOnpress} />
