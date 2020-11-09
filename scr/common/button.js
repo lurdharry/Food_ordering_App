@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontFamily: 'Graphik-Medium',
+    fontFamily: 'Poppins-Medium',
     fontSize: hp(18),
     color: Colors.White,
-    marginTop: Platform.OS === 'android' ? -hp(7) : 0,
+    // marginTop: Platform.OS === 'android' ? -hp(7) : 0,
   },
   disabledStyle: {
     // backgroundColor: Colors.InactiveBlue,
