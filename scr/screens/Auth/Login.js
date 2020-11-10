@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   SemiBoldText,
+  navigate,
 } from '../../common';
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
@@ -19,6 +20,10 @@ class Login extends Component {
 
   handleChange = (state, value) => {
     this.setState({[state]: value});
+  };
+
+  handleSignIn = () => {
+    navigate(this, 'home');
   };
 
   render() {
@@ -50,7 +55,7 @@ class Login extends Component {
             onChangeText={value => this.handleChange('password', value)}
           />
           <View style={{marginTop: hp(60)}}>
-            <Button title="Sign In" onPress={this.handleOnpress} />
+            <Button title="Sign In" onPress={this.handleSignIn} />
           </View>
           <View style={styles.rowText}>
             <RegularText title="Don’t have an account?  " style={styles.dont} />
