@@ -3,7 +3,7 @@ import {View, StyleSheet, StatusBar, FlatList} from 'react-native';
 import {RegularText, hp, wp, SemiBoldText, CategoryCard} from '../../common';
 import * as Colors from '../../common/colors';
 import {Location} from '../../../assets/icons.svg/icon_svg';
-import {Categories, PopularRow} from './utils';
+import {Categories, PopularRow, PopularRes, RestaurantCard} from './utils';
 
 class Home extends Component {
   state = {
@@ -40,8 +40,14 @@ class Home extends Component {
               keyExtractor={(user, index) => index.toString()}
             />
           </View>
-
           <PopularRow />
+          <FlatList
+            data={PopularRes}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({item}) => {
+              return <RestaurantCard item={item} />;
+            }}
+          />
         </View>
       </>
     );
