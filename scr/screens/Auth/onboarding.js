@@ -9,7 +9,15 @@ import {
   StatusBar,
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {BoldText, RegularText, hp, wp, Button, navigate} from '../../common';
+import {
+  BoldText,
+  RegularText,
+  hp,
+  wp,
+  Button,
+  navigate,
+  FavHeader,
+} from '../../common';
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 import {onboard1, onboard2, onboard3} from '../../../assets/images';
