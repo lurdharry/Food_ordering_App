@@ -17,6 +17,29 @@ import * as Colors from '../../common/colors';
 
 import {wp, SemiBoldText, hp, MediumText, RegularText} from '../../common';
 
+export const Types = [
+  {
+    key: 1,
+    title: 'Best Seller',
+  },
+  {
+    key: 2,
+    title: 'Veg Pizza',
+  },
+  {
+    key: 3,
+    title: 'Pizza Mania',
+  },
+  {
+    key: 4,
+    title: 'Sides',
+  },
+  {
+    key: 5,
+    title: 'Fastfood',
+  },
+];
+
 export const Categories = [
   {
     title: 'All',
@@ -79,6 +102,7 @@ export const PopularRes = [
     category: 'Pizza',
     time: '20',
     discount: '50',
+    count: 220,
   },
   {
     name: 'SK Restro',
@@ -88,6 +112,7 @@ export const PopularRes = [
     category: 'Chienese',
     time: '40',
     discount: '10',
+    count: 157,
   },
   {
     name: 'Black Fish',
@@ -97,6 +122,7 @@ export const PopularRes = [
     category: 'Seafood',
     time: '40',
     discount: '30',
+    count: 103,
   },
   {
     name: 'Goichi Oniko',
@@ -106,22 +132,23 @@ export const PopularRes = [
     category: 'Fastfood',
     time: '30',
     discount: '50',
+    count: 500,
   },
 ];
 
-export const PopularRow = ({onPress}) => (
+export const PopularRow = ({onPress, title}) => (
   <View style={styles.row}>
-    <SemiBoldText title="Popular Restaurents" style={styles.popularText} />
+    <SemiBoldText title={title} style={styles.popularText} />
     <TouchableOpacity onPress={onPress}>
       <Filter />
     </TouchableOpacity>
   </View>
 );
 
-export const RestaurantCard = ({item}) => {
+export const RestaurantCard = ({item, navigation}) => {
   const {discount, time, category, rating, color, icon, name} = item;
   return (
-    <TouchableOpacity style={styles.restaurant}>
+    <TouchableOpacity style={styles.restaurant} onPress={navigation}>
       <View style={styles.icon_name}>
         <View style={[styles.iconContainter, {backgroundColor: color}]}>
           {icon}
