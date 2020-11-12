@@ -6,10 +6,16 @@ import {
   Beverages,
   Asian,
   Filter,
+  Fork,
+  Pot,
+  Fish,
+  Sun,
+  Star,
+  Timer,
 } from '../../../assets/icons.svg/icon_svg';
 import * as Colors from '../../common/colors';
 
-import {wp, SemiBoldText, hp} from '../../common';
+import {wp, SemiBoldText, hp, MediumText, RegularText} from '../../common';
 
 export const Categories = [
   {
@@ -64,6 +70,45 @@ export const Categories = [
   // },
 ];
 
+export const PopularRes = [
+  {
+    name: 'Conrad food',
+    icon: <Fork />,
+    color: Colors.yellow,
+    rating: 4.6,
+    category: 'Pizza',
+    time: '20',
+    discount: '50',
+  },
+  {
+    name: 'SK Restro',
+    icon: <Pot />,
+    color: Colors.green100,
+    rating: 4.4,
+    category: 'Chienese',
+    time: '40',
+    discount: '10',
+  },
+  {
+    name: 'Black Fish',
+    icon: <Fish />,
+    color: Colors.Black,
+    rating: 4.3,
+    category: 'Seafood',
+    time: '40',
+    discount: '30',
+  },
+  {
+    name: 'Goichi Oniko',
+    icon: <Sun />,
+    color: Colors.brown100,
+    rating: 4.0,
+    category: 'Fastfood',
+    time: '30',
+    discount: '50',
+  },
+];
+
 export const PopularRow = ({onPress}) => (
   <View style={styles.row}>
     <SemiBoldText title="Popular Restaurents" style={styles.popularText} />
@@ -73,7 +118,76 @@ export const PopularRow = ({onPress}) => (
   </View>
 );
 
+export const RestaurantCard = ({item}) => {
+  const {discount, time, category, rating, color, icon, name} = item;
+  return (
+    <TouchableOpacity style={styles.restaurant}>
+      <View style={styles.icon_name}>
+        <View style={[styles.iconContainter, {backgroundColor: color}]}>
+          {icon}
+        </View>
+        <View style={{alignSelf: 'center'}}>
+          <SemiBoldText title={name} style={styles.name} />
+          <View style={styles.star_cat}>
+            <Star style={styles.star} />
+            <MediumText
+              title={`${rating.toString()}  •`}
+              style={styles.rating}
+            />
+            <RegularText title={`${category}  •`} style={styles.rating} />
+            <Timer style={{marginBottom: hp(3)}} />
+            <RegularText title={`${time} min`} style={styles.time} />
+          </View>
+        </View>
+      </View>
+      <SemiBoldText title={`${discount} % OFF`} style={styles.discount} />
+    </TouchableOpacity>
+  );
+};
+
 const styles = StyleSheet.create({
+  time: {
+    marginLeft: wp(8),
+    color: Colors.LightPurple,
+  },
+  star: {
+    marginRight: wp(5),
+  },
+  discount: {
+    fontSize: hp(12),
+    color: Colors.Purple,
+  },
+  rating: {
+    marginRight: wp(8),
+    color: Colors.LightPurple,
+  },
+  star_cat: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  name: {
+    fontSize: hp(16),
+    marginBottom: hp(10),
+  },
+  icon_name: {
+    flexDirection: 'row',
+  },
+  iconContainter: {
+    height: hp(64),
+    width: hp(64),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: hp(16),
+    marginRight: wp(16),
+  },
+  restaurant: {
+    flexDirection: 'row',
+    width: wp(319),
+    marginLeft: wp(24),
+    marginRight: wp(32),
+    marginBottom: hp(30),
+    justifyContent: 'space-between',
+  },
   popularText: {
     fontSize: hp(18),
     color: Colors.Black,
