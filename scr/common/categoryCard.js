@@ -18,7 +18,30 @@ const CategoryCard = ({Icon, title, onPress, selected}) => (
   </View>
 );
 
+const TypesCard = ({onPress, selected, title}) => (
+  <TouchableOpacity
+    style={[styles.typeView, selected && {backgroundColor: Colors.Purple}]}
+    onPress={onPress}>
+    <MediumText
+      style={[styles.typeText, selected && {color: Colors.White}]}
+      title={title}
+    />
+  </TouchableOpacity>
+);
+
 const styles = StyleSheet.create({
+  typeText: {
+    color: Colors.Black,
+    fontSize: hp(12),
+  },
+  typeView: {
+    width: wp(100),
+    height: hp(40),
+    alignItems: 'center',
+    borderRadius: hp(12),
+    justifyContent: 'center',
+    backgroundColor: Colors.White,
+  },
   title: {
     fontSize: hp(12),
     marginTop: hp(8),
@@ -39,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {CategoryCard};
+export {CategoryCard, TypesCard};
