@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, StatusBar, FlatList} from 'react-native';
-import {RegularText, hp, wp, SemiBoldText, CategoryCard} from '../../common';
+import {
+  RegularText,
+  hp,
+  wp,
+  SemiBoldText,
+  CategoryCard,
+  FavHeader,
+  navigate,
+} from '../../common';
 import * as Colors from '../../common/colors';
 import {Location} from '../../../assets/icons.svg/icon_svg';
 import {Categories, PopularRow, PopularRes, RestaurantCard} from './utils';
@@ -40,12 +48,17 @@ class Home extends Component {
               keyExtractor={(user, index) => index.toString()}
             />
           </View>
-          <PopularRow />
+          <PopularRow title="Popular Restaurents" />
           <FlatList
             data={PopularRes}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({item}) => {
-              return <RestaurantCard item={item} />;
+              return (
+                <RestaurantCard
+                  item={item}
+                  navigation={() => navigate(this, 'detail', {details: item})}
+                />
+              );
             }}
           />
         </View>
