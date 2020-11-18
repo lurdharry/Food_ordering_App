@@ -478,3 +478,71 @@ export const Up = props => (
     />
   </Svg>
 );
+
+export const Plus = props => (
+  <Svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...props}>
+    <Path
+      d="M2 7H12M7 2V12V2Z"
+      stroke="#6D61F2"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </Svg>
+);
+export const Mark = props => (
+  <Svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...props}>
+    <Path
+      d="M12.5461 3.2037C12.929 3.58659 12.929 4.20725 12.5461 4.58995L5.97037 11.1659C5.58748 11.5486 4.967 11.5486 4.58411 11.1659L1.45379 8.03539C1.0709 7.65269 1.0709 7.03203 1.45379 6.64933C1.83649 6.26644 2.45716 6.26644 2.83986 6.64933L5.27714 9.08661L11.1599 3.2037C11.5428 2.821 12.1634 2.821 12.5461 3.2037Z"
+      fill="white"
+    />
+  </Svg>
+);
+
+export const RoundedFilter = props => (
+  <Svg width="48" height="48" viewBox="0 0 48 48" fill="none" {...props}>
+    <Rect width="48" height="48" rx="16" fill="#F8F8FA" />
+    <Path
+      d="M31 19H34"
+      stroke="#18172B"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <Path
+      d="M14.4312 19H25.6812"
+      stroke="#18172B"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <Path
+      d="M22.75 29H33.75"
+      stroke="#18172B"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <Path
+      d="M14.4312 29H17.4312"
+      stroke="#18172B"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <Path
+      d="M28.5 21.5C29.8807 21.5 31 20.3807 31 19C31 17.6193 29.8807 16.5 28.5 16.5C27.1193 16.5 26 17.6193 26 19C26 20.3807 27.1193 21.5 28.5 21.5Z"
+      stroke="#18172B"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <Path
+      d="M20.25 31.5C21.6307 31.5 22.75 30.3807 22.75 29C22.75 27.6193 21.6307 26.5 20.25 26.5C18.8693 26.5 17.75 27.6193 17.75 29C17.75 30.3807 18.8693 31.5 20.25 31.5Z"
+      stroke="#18172B"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </Svg>
+);
