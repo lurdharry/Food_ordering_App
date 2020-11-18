@@ -6,6 +6,7 @@ import Onboarding from './Auth/onboarding';
 import Login from './Auth/Login';
 import Home from './Home/home';
 import Details from './Home/Details';
+import Menu from './Menu/index';
 const Stack = createStackNavigator();
 
 function Navigation() {
@@ -15,6 +16,7 @@ function Navigation() {
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="detail" component={Details} />
+      {/* <Stack.Screen name="menu" component={Menu} /> */}
     </Stack.Navigator>
   );
 }
