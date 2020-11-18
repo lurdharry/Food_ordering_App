@@ -8,6 +8,7 @@ import {
   SemiBoldText,
   BoldText,
   TypesCard,
+  navigate,
 } from '../../common';
 import * as Colors from '../../common/colors';
 import {RestImage} from '../../../assets/images';
@@ -39,7 +40,10 @@ class Details extends Component {
         />
         <View style={styles.container}>
           <Image source={RestImage} style={styles.pic} resizeMode="stretch" />
-          <DetailsCard details={details} />
+          <DetailsCard
+            details={details}
+            onPress={() => navigate(this, 'menu')}
+          />
           <PopularRow title="Menu" />
           <View style={{height: hp(60)}}>
             <ScrollView
@@ -70,7 +74,7 @@ const DetailsCard = ({details, onPress}) => {
   return (
     <View style={styles.detailsView}>
       <View>
-        <BoldText title={name} style={styles.name} />
+        <BoldText title={name} style={styles.name} onPress={onPress} />
         <View style={styles.star_cat}>
           <Star height={14} width={14} style={styles.star} />
           <SemiBoldText title={`${rating.toString()} `} style={styles.rating} />
@@ -113,6 +117,8 @@ const styles = StyleSheet.create({
   more: {
     fontSize: hp(12),
     color: Colors.Purple,
+    // zIndex: 100,
+    lineHeight: hp(50),
   },
   detailsView: {
     flexDirection: 'row',
