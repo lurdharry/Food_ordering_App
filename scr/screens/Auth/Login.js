@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {View, StyleSheet, StatusBar} from 'react-native';
 import {
   RegularText,
@@ -24,6 +25,7 @@ class Login extends Component {
 
   handleSignIn = () => {
     navigate(this, 'home');
+    // console.log(this.props.cart);
   };
 
   render() {
@@ -67,7 +69,18 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  const {finshedOnboarding, cart} = state.appReducer;
+  return {
+    finished: finshedOnboarding,
+    cart,
+  };
+};
+// const mapDispatchToProps = {
+//   // finishedOnboarding,
+// };
+
+export default connect(mapStateToProps, null)(Login);
 
 const styles = StyleSheet.create({
   rowText: {

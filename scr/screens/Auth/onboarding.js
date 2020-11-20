@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
   Text,
   View,
@@ -21,6 +22,7 @@ import {
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 import {onboard1, onboard2, onboard3} from '../../../assets/images';
+import {finishedOnboarding} from '../../store/actions';
 
 const data = [
   {
@@ -85,6 +87,10 @@ class Onboarding extends Component {
   onSlideChange = (start, end) => {
     this.setState({state: start});
   };
+  finshed = () => {
+    this.props.finishedOnboarding(true);
+    navigate(this, 'login');
+  };
 
   render() {
     return (
@@ -94,7 +100,7 @@ class Onboarding extends Component {
           <TouchableOpacity
             style={styles.skipView}
             hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
-            onPress={() => navigate(this, 'login')}>
+            onPress={() => this.finshed()}>
             <RegularText title="Skip" style={styles.skipText} />
           </TouchableOpacity>
           <AppIntroSlider
@@ -115,7 +121,18 @@ class Onboarding extends Component {
   }
 }
 
-export default Onboarding;
+const mapStateToProps = state => {
+  const {finshedOnboarding} = state.appReducer;
+  return {
+    finished: finshedOnboarding,
+  };
+};
+
+const mapDispatchToProps = {
+  finishedOnboarding,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Onboarding);
 
 const styles = StyleSheet.create({
   buttonCircle: {

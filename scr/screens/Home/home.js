@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {View, StyleSheet, StatusBar, FlatList} from 'react-native';
 import {
   RegularText,
@@ -67,7 +68,22 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  const {cart, cartTotal, finishedOnboarding} = state.appReducer;
+  return {
+    cart,
+    finishedOnboarding,
+    cartTotal,
+  };
+};
+// const mapDispatchToProps = {
+//   addItemToCart,
+//   removeFromCart,
+// };
+
+export default connect(mapStateToProps, null)(Home);
+
+// export default Home;
 
 const Address_Location = () => (
   <View style={styles.Location}>

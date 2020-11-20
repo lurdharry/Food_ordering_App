@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   Animated,
+  Text,
 } from 'react-native';
 import {Header, wp, hp, TypesCard} from '../../common';
 import * as Colors from '../../common/colors';
@@ -21,40 +22,30 @@ class Menu extends Component {
     Cart: [],
     animation: new Animated.Value(0),
   };
-
+  animatedValue = new Animated.Value(0);
   onSelect = title => {
     this.setState({title});
+    console.log(this.props.cart);
   };
   addTocart = item => {
-    const {cart} = this.props;
-    if (cart.length > 0) {
-      const index = cart.indexOf(item);
-      if (index > -1) {
-        this.props.removeFromCart(item);
-      }
-    } else {
-      this.props.addItemToCart(item);
-    }
+    this.props.addItemToCart(item);
   };
 
   showSelected = item => {
     const {cart} = this.props;
-    if (cart.some(food => food.id === item.id)) {
-      return true;
-    } else {
-      return false;
+    try {
+      if (cart.some(food => food.id === item.id)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return error;
     }
   };
+
   removeFromCart = item => {
     this.props.removeFromCart(item);
-    // let Cart = this.state.Cart;
-    // if (Cart.length > 0) {
-    //   const index = Cart.indexOf(item);
-    //   if (index > -1) {
-    //     Cart.splice(index, 1);
-    //   }
-    // }
-    // this.setState({Cart});
   };
 
   _renderItem = ({item}) => {
@@ -82,6 +73,10 @@ class Menu extends Component {
   };
 
   render() {
+    let animation = this.animatedValue.interpolate({
+      inputRange: [0, 0.3, 1],
+      outputRange: [0, 0, 0],
+    });
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.White} />
@@ -91,7 +86,7 @@ class Menu extends Component {
             data={Types}
             contentContainerStyle={{
               paddingHorizontal: wp(24),
-              paddingTop: hp(28),
+              paddingVertical: hp(28),
               paddingRight: wp(24),
             }}
             renderItem={this._renderCat}
@@ -102,19 +97,37 @@ class Menu extends Component {
           <FlatList
             data={Foods}
             renderItem={this._renderItem}
-            extraData={this.state}
+            extraData={this.props}
           />
         </View>
+        {this.props.cart.length > 0 ? (
+          <Animated.View
+            style={{
+              transform: [{translateY: animation}],
+              height: 70,
+              backgroundColor: 'red',
+              position: 'absolute',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 10000,
+              width: '100%',
+              bottom: 0,
+            }}>
+            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              jjjjj
+            </Text>
+          </Animated.View>
+        ) : null}
       </>
     );
   }
 }
 
-// export default Menu;
 const mapStateToProps = state => {
-  const {cart, cartTotal} = state;
+  const {cart, cartTotal, finishedOnboarding} = state.appReducer;
   return {
     cart,
+    finishedOnboarding,
     cartTotal,
   };
 };
@@ -124,9 +137,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
-const styles = StyleSheet.create({
-  scroll: {
-    paddingHorizontal: wp(24),
-    flexDirection: 'row',
-  },
-});

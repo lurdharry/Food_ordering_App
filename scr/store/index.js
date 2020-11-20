@@ -3,12 +3,12 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import {persistReducer, persistStore} from 'redux-persist';
 import logger from 'redux-logger';
-import rootReducer from './reducers';
+import {rootReducer} from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  //   whitelist: ['auth', 'nairaWallet', 'profile', 'airtimeData'],
+  // whitelist: ['cart', 'cartTotal', 'currencyTotal', 'finshedOnboarding'],
 };
 
 const middleware = [ReduxThunk, logger];
