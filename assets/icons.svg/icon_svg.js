@@ -490,6 +490,18 @@ export const Plus = props => (
     />
   </Svg>
 );
+export const Minus = props => (
+  <Svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...props}>
+    <Path
+      opacity="0.5"
+      d="M2 7H12"
+      stroke="#6E80B0"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </Svg>
+);
 export const Mark = props => (
   <Svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...props}>
     <Path
@@ -543,6 +555,17 @@ export const RoundedFilter = props => (
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
+    />
+  </Svg>
+);
+
+export const ArrowDown = props => (
+  <Svg width="16" height="16" viewBox="0 0 16 16" fill="none" {...props}>
+    <Path
+      d="M1.99336 4.92C1.91575 4.99741 1.85418 5.08937 1.81217 5.19061C1.77016 5.29185 1.74853 5.40039 1.74853 5.51C1.74853 5.61961 1.77016 5.72815 1.81217 5.82939C1.85418 5.93063 1.91575 6.02259 1.99336 6.1L7.53336 11.64C7.59503 11.7018 7.66829 11.7508 7.74894 11.7843C7.82959 11.8177 7.91605 11.835 8.00336 11.835C8.09067 11.835 8.17713 11.8177 8.25778 11.7843C8.33842 11.7508 8.41168 11.7018 8.47336 11.64L14.0134 6.1C14.34 5.77333 14.34 5.24666 14.0134 4.92C13.6867 4.59333 13.16 4.59333 12.8334 4.92L8.00003 9.74666L3.16669 4.91333C2.84669 4.59333 2.31336 4.59333 1.99336 4.92Z"
+      fill="white"
+      stroke="white"
+      stroke-width="0.4"
     />
   </Svg>
 );

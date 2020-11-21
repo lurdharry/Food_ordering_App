@@ -24,13 +24,13 @@ export const FavHeader = ({onFavPress, navigation, isFav}) => (
   </View>
 );
 
-export const Header = ({onFavPress, navigation, isFav}) => (
+export const Header = ({navigation, title, noRight}) => (
   <View style={styles.headerView}>
     <TouchableOpacity onPress={() => navigation.pop()}>
       <BackIcon />
     </TouchableOpacity>
-    <BoldText title="Menu" style={styles.title} />
-    <RoundedFilter />
+    <BoldText title={title || 'Menu'} style={styles.title} />
+    {noRight ? <View style={{width: 48}} /> : <RoundedFilter />}
   </View>
 );
 
