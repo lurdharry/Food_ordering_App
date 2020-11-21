@@ -9,10 +9,10 @@ import {
   Animated,
   Text,
 } from 'react-native';
-import {Header, wp, hp, TypesCard} from '../../common';
+import {Header, wp, hp, TypesCard, navigate} from '../../common';
 import * as Colors from '../../common/colors';
 import {Types} from '../Home/utils';
-import {Foods, MenuFoodCard} from './utils';
+import {Foods, MenuFoodCard, CartPreview} from './utils';
 import {addItemToCart, removeFromCart} from '../../store/actions';
 
 class Menu extends Component {
@@ -77,6 +77,7 @@ class Menu extends Component {
       inputRange: [0, 0.3, 1],
       outputRange: [0, 0, 0],
     });
+    const {cart, cartTotal} = this.props;
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.White} />
@@ -102,20 +103,12 @@ class Menu extends Component {
         </View>
         {this.props.cart.length > 0 ? (
           <Animated.View
-            style={{
-              transform: [{translateY: animation}],
-              height: 70,
-              backgroundColor: 'red',
-              position: 'absolute',
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 10000,
-              width: '100%',
-              bottom: 0,
-            }}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-              jjjjj
-            </Text>
+            style={[styles.cart, {transform: [{translateY: animation}]}]}>
+            <CartPreview
+              count={cart.length}
+              cartTotal={cartTotal}
+              onPress={() => navigate(this, 'cart')}
+            />
           </Animated.View>
         ) : null}
       </>
@@ -137,3 +130,20 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+
+const styles = StyleSheet.create({
+  cart: {
+    height: hp(90),
+    backgroundColor: Colors.Purple,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10000,
+    width: '100%',
+    bottom: 0,
+    paddingTop: hp(16),
+    paddingBottom: hp(34),
+    paddingLeft: wp(22),
+    paddingRight: wp(16),
+  },
+});
