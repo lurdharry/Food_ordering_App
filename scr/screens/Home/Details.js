@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, StatusBar, View, Image, ScrollView} from 'react-native';
+import {connect} from 'react-redux';
+import {
+  StyleSheet,
+  StatusBar,
+  View,
+  Image,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import {
   hp,
   wp,
@@ -14,6 +22,8 @@ import * as Colors from '../../common/colors';
 import {RestImage} from '../../../assets/images';
 import {Star} from '../../../assets/icons.svg/icon_svg';
 import {PopularRow, Types} from './utils';
+import {addItemToCart, removeFromCart} from '../../store/actions';
+import {MenuFoodCard, Foods} from '../Menu/utils';
 
 class Details extends Component {
   state = {
@@ -26,6 +36,41 @@ class Details extends Component {
   onSelect = title => {
     this.setState({title});
   };
+
+  addTocart = item => {
+    this.props.addItemToCart(item);
+  };
+
+  showSelected = item => {
+    const {cart} = this.props;
+    try {
+      if (cart.some(food => food.id === item.id)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return error;
+    }
+  };
+
+  removeFromCart = item => {
+    this.props.removeFromCart(item);
+  };
+
+  _renderItem = ({item}) => {
+    const selected = this.showSelected(item);
+    return (
+      <MenuFoodCard
+        source={item}
+        added={selected}
+        onpress={() => {
+          selected ? this.removeFromCart(item) : this.addTocart(item);
+        }}
+      />
+    );
+  };
+
   render() {
     const {isFav, title} = this.state;
     const {details} = this.props.route.params;
@@ -60,13 +105,33 @@ class Details extends Component {
               ))}
             </ScrollView>
           </View>
+          <FlatList
+            data={Foods}
+            renderItem={this._renderItem}
+            extraData={this.props}
+            style={{flex: 1, paddingTop: hp(10)}}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
       </>
     );
   }
 }
 
-export default Details;
+const mapStateToProps = state => {
+  const {cart, cartTotal, finishedOnboarding} = state.appReducer;
+  return {
+    cart,
+    finishedOnboarding,
+    cartTotal,
+  };
+};
+const mapDispatchToProps = {
+  addItemToCart,
+  removeFromCart,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details);
 
 const DetailsCard = ({details, onPress}) => {
   const {name, rating, category, count} = details;
