@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
 import {food1, food2, food3, food4, food5} from '../../../assets/images';
 import {Mark, Plus} from '../../../assets/icons.svg/icon_svg';
 import {
@@ -11,6 +11,7 @@ import {
   Purple,
   White,
   LightGrey,
+  BoldText,
 } from '../../common';
 
 export const MenuFoodCard = ({source, onpress, added}) => {
@@ -47,7 +48,56 @@ export const MenuFoodCard = ({source, onpress, added}) => {
   );
 };
 
+export const CartPreview = ({count, cartTotal, onPress}) => {
+  const item = count === 1 ? '  item' : '  items';
+  return (
+    <View style={styles.CartPreview}>
+      <Text
+        style={{
+          textAlign: 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <BoldText title={count.toString()} style={styles.count} />
+        <RegularText title={item} style={styles.item} />
+      </Text>
+      <BoldText title="View Cart" style={styles.viewCart} onPress={onPress} />
+      <View style={styles.amountBox}>
+        <MediumText
+          title={`$${cartTotal.toFixed(2).toString()}`}
+          style={styles.viewCart}
+        />
+      </View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
+  amountBox: {
+    height: hp(40),
+    width: wp(80),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: hp(12),
+    backgroundColor: 'rgba(255,255,255,.1)',
+  },
+  viewCart: {
+    color: White,
+    fontSize: hp(14),
+  },
+  item: {
+    color: 'rgba(255,255,255,.5)',
+  },
+  count: {
+    color: White,
+    fontSize: hp(20),
+  },
+  CartPreview: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+  },
   added: {
     color: White,
     fontSize: hp(14),
@@ -118,7 +168,7 @@ export const Foods = [
   },
   {
     id: 3,
-    name: 'Veg Loaded',
+    name: 'Veg Load',
     cat: 'Pizza Mania',
     price: '8.50',
     image: food3,
