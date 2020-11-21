@@ -10,10 +10,11 @@ import Login from './Auth/Login';
 import Home from './Home/home';
 import Details from './Home/Details';
 import Menu from './Menu/index';
+import Cart from './Cart/index';
 const Stack = createStackNavigator();
 
 function Navigation() {
-  const {finshedOnboarding} = useSelector(state => state);
+  const {finshedOnboarding} = useSelector(state => state.appReducer);
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
@@ -24,6 +25,7 @@ function Navigation() {
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="detail" component={Details} />
       <Stack.Screen name="menu" component={Menu} />
+      <Stack.Screen name="cart" component={Cart} />
     </Stack.Navigator>
   );
 }

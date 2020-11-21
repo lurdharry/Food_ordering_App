@@ -27,7 +27,7 @@ import {finishedOnboarding} from '../../store/actions';
 const data = [
   {
     key: 1,
-    title: 'Be Togather',
+    title: 'Be Together',
     subtitle:
       'Healthy eating means eating a variety of foods that give you the nutrients you need to maintain your health, feel good, and have energy.',
     image: onboard1,
