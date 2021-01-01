@@ -9,6 +9,7 @@ import {
   CategoryCard,
   FavHeader,
   navigate,
+  paddingTopiOS,
 } from '../../common';
 import * as Colors from '../../common/colors';
 import {Location} from '../../../assets/icons.svg/icon_svg';
@@ -26,7 +27,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <StatusBar backgroundColor={Colors.White} barStyle="dark-content" />
+        <StatusBar backgroundColor={Colors.LightGrey} barStyle="dark-content" />
         <View style={styles.container}>
           <Address_Location />
           <View style={{height: hp(140), marginBottom: hp(30)}}>
@@ -118,13 +119,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: wp(24),
     alignSelf: 'flex-start',
-    marginTop: hp(15),
-    // height: hp(50),
   },
 
   container: {
     alignItems: 'center',
     flex: 1,
-    backgroundColor: Colors.White,
+    backgroundColor: Colors.LightGrey,
+    paddingTop: paddingTopiOS,
   },
 });

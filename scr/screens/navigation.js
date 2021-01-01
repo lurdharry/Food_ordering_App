@@ -11,6 +11,7 @@ import Home from './Home/home';
 import Details from './Home/Details';
 import Menu from './Menu/index';
 import Cart from './Cart/index';
+import BottomTabNavigator from './tabNav';
 const Stack = createStackNavigator();
 
 function Navigation() {
@@ -22,7 +23,7 @@ function Navigation() {
         component={finshedOnboarding ? Login : Onboarding}
       />
       <Stack.Screen name="login" component={Login} />
-      <Stack.Screen name="home" component={Home} />
+      <Stack.Screen name="home" component={BottomTabNavigator} />
       <Stack.Screen name="detail" component={Details} />
       <Stack.Screen name="menu" component={Menu} />
       <Stack.Screen name="cart" component={Cart} />

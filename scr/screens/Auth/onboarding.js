@@ -18,6 +18,7 @@ import {
   Button,
   navigate,
   FavHeader,
+  paddingTopiOS,
 } from '../../common';
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
@@ -51,7 +52,7 @@ class Onboarding extends Component {
     state: 0,
   };
 
-  _renderItems = ({item, index}) => (
+  _renderItems = ({item}) => (
     <View style={styles.itemView}>
       <Image
         source={item.image}
@@ -84,7 +85,7 @@ class Onboarding extends Component {
     return 'Get Started';
   };
 
-  onSlideChange = (start, end) => {
+  onSlideChange = start => {
     this.setState({state: start});
   };
   finshed = () => {
@@ -148,7 +149,6 @@ const styles = StyleSheet.create({
     width: hp(10),
     borderRadius: hp(5),
     backgroundColor: Colors.dotColor,
-    // opacity: 0.2,
   },
   activeDotStyle: {
     height: hp(10),
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   skipView: {
     position: 'absolute',
-    top: hp(20),
+    top: paddingTopiOS,
     right: wp(24),
     zIndex: 100,
   },

@@ -9,6 +9,8 @@ import {
   TextInput,
   SemiBoldText,
   navigate,
+  emailValidator,
+  paddingTopiOS,
 } from '../../common';
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
@@ -17,19 +19,33 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
+    emailEror: '',
+    disabled: true,
   };
 
   handleChange = (state, value) => {
-    this.setState({[state]: value});
+    this.setState({[state]: value}, this.validateInput);
+  };
+
+  validateInput = () => {
+    const {password, emailEror} = this.state;
+    if (emailEror.length || password.length < 6) {
+      this.setState({disabled: true});
+    } else this.setState({disabled: false});
   };
 
   handleSignIn = () => {
     navigate(this, 'home');
-    // console.log(this.props.cart);
+  };
+
+  validateEmail = email => {
+    if (emailValidator(email)) {
+      this.setState({emailEror: ''});
+    } else this.setState({emailEror: 'Invalid Email'});
   };
 
   render() {
-    const {email, password} = this.state;
+    const {email, password, emailEror, disabled} = this.state;
     return (
       <>
         <StatusBar backgroundColor={Colors.White} barStyle="dark-content" />
@@ -45,6 +61,8 @@ class Login extends Component {
             placeholder="Input Email"
             inputContainerStyle={styles.emailInput}
             onChangeText={value => this.handleChange('email', value)}
+            onBlur={() => this.validateEmail(email)}
+            error={emailEror}
           />
           <TextInput
             label="Password"
@@ -55,9 +73,18 @@ class Login extends Component {
             labelStyle={styles.passwordLabel}
             isPass
             onChangeText={value => this.handleChange('password', value)}
+            error={
+              password.length && password.length < 6
+                ? 'Password must be more than five(5) characters'
+                : ''
+            }
           />
           <View style={{marginTop: hp(60)}}>
-            <Button title="Sign In" onPress={this.handleSignIn} />
+            <Button
+              title="Sign In"
+              onPress={this.handleSignIn}
+              disabled={disabled}
+            />
           </View>
           <View style={styles.rowText}>
             <RegularText title="Don’t have an account?  " style={styles.dont} />
@@ -76,6 +103,7 @@ const mapStateToProps = state => {
     cart,
   };
 };
+
 // const mapDispatchToProps = {
 //   // finishedOnboarding,
 // };
@@ -117,10 +145,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: Colors.White,
+    paddingTop: paddingTopiOS,
   },
   title: {
     fontSize: hp(24),
-    marginTop: hp(36),
     marginBottom: hp(8),
   },
 });
