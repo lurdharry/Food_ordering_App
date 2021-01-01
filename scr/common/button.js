@@ -9,7 +9,6 @@ const Button = ({
   style,
   buttonStyle,
   disabled,
-  disabledStyle,
   loading,
   onPress,
   title,
@@ -26,7 +25,7 @@ const Button = ({
       loading={loading}
       titleStyle={[styles.title, titleStyle]}
       disabled={disabled}
-      disabledStyle={disabledStyle}
+      disabledStyle={styles.disabledStyle}
       disabledTitleStyle={styles.disabledTitleStyle}
       onPress={onPress}
       iconRight={iconRight}
@@ -39,21 +38,18 @@ export {Button};
 const styles = StyleSheet.create({
   button: {
     width: wp(327),
-    height: hp(64),
     backgroundColor: Colors.Purple,
     borderStyle: 'solid',
     borderRadius: hp(20),
-    // alignSelf: 'center',
+    paddingVertical: hp(12),
   },
-
   title: {
     fontFamily: 'Poppins-Medium',
     fontSize: hp(18),
     color: Colors.White,
-    // marginTop: Platform.OS === 'android' ? -hp(7) : 0,
   },
   disabledStyle: {
-    // backgroundColor: Colors.InactiveBlue,
+    backgroundColor: 'grey',
   },
   disabledTitleStyle: {
     color: Colors.White,

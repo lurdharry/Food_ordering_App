@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Platform, View, TouchableOpacity} from 'react-native';
-import {hp, wp, navigate} from './utils';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {hp, wp, paddingTopiOS} from './utils';
 import {
   BackIcon,
   Like,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: wp(24),
-    paddingTop: hp(16),
+    paddingTop: paddingTopiOS,
     alignItems: 'center',
   },
   endView: {

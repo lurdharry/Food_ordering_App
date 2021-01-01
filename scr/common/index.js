@@ -5,3 +5,4 @@ export * from './TextInput';
 export * from './categoryCard';
 export * from './header';
 export * from './colors';
+export * from './CustomTab';

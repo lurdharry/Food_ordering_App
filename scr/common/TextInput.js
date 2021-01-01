@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     marginRight: wp(12),
   },
   errorMessage: {
-    // color: Colors.Red,
+    color: 'red',
     marginTop: hp(13),
   },
 
