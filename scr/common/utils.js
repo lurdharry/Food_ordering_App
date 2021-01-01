@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import {Platform, Dimensions, StatusBar} from 'react-native';
 import {
   widthPercentageToDP as wdp,
   heightPercentageToDP as hdp,
@@ -64,10 +64,10 @@ export const toMoney = num => {
 //   return 'Weak Password';
 // };
 
-// const emailValidator = email => {
-//   const re = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   return re.test(email);
-// };
+export const emailValidator = email => {
+  const re = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+};
 
 // export const validateEmail = email => {
 //   if (emailValidator(email)) {
@@ -83,3 +83,35 @@ export const absolute = value => {
 export const navigate = (This, ...args) => {
   This.props.navigation.navigate(...args);
 };
+
+//iPhoneX and StatusBar helpers
+export function isIphoneX() {
+  const dimen = Dimensions.get('window');
+  return (
+    Platform.OS === 'ios' &&
+    !Platform.isPad &&
+    !Platform.isTVOS &&
+    (dimen.height === 812 ||
+      dimen.width === 812 ||
+      dimen.height === 896 ||
+      dimen.width === 896)
+  );
+}
+
+export function ifIphoneX(iphoneXStyle, regularStyle) {
+  if (isIphoneX()) {
+    return iphoneXStyle;
+  }
+  return regularStyle;
+}
+
+export function getStatusBarHeight(safe) {
+  return Platform.select({
+    ios: ifIphoneX(safe ? 44 : 30, 20),
+    android: StatusBar.currentHeight,
+    default: 0,
+  });
+}
+
+export const paddingTopiOS =
+  Platform.OS === 'ios' ? getStatusBarHeight(true) : 0;
