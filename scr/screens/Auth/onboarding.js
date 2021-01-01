@@ -90,7 +90,6 @@ class Onboarding extends Component {
   };
   finshed = () => {
     this.props.finishedOnboarding(true);
-    navigate(this, 'login');
   };
 
   render() {
