@@ -1,7 +1,14 @@
-import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useState, ReactNode} from 'react';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  TextInputProps,
+  TextStyle,
+} from 'react-native';
 import {RegularText, MediumText} from './text';
-import {hp, wp} from './utils';
+import {wp, hp} from './utils';
 import * as Colors from './colors';
 import {
   PasswordEyeSvg,
@@ -9,28 +16,36 @@ import {
   VerifiedSvg,
 } from '../../assets/icons.svg/icon_svg';
 
-/**
- *
- * error - error
- * neutral - onLeaveFocus
- * onFocus  - onfocus
- */
-const Input = ({
+interface props extends TextInputProps {
+  label?: string;
+  error?: string;
+  errorStyle?: object;
+  labelStyle?: TextStyle | TextStyle[];
+  editable?: boolean;
+  value: string;
+  onBlur: () => void;
+  onFocus: () => void;
+  inputContainerStyle?: object;
+  inputStyle?: object;
+  isPass?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  isValid?: boolean;
+  noBorder?: boolean;
+  customInputStyle?: object;
+}
+
+const Input: React.FC<props> = ({
   error,
   style,
   value,
-  keyboardType,
-  placeholder,
   errorStyle,
   label,
   labelStyle,
   inputStyle,
   inputContainerStyle,
-  isEditable = true,
+  editable = true,
   isValid,
-  onChange,
-  onChangeText,
-  maxLength,
   onFocus,
   onBlur,
   leftIcon,
@@ -67,30 +82,25 @@ const Input = ({
           styles.textInput,
           {
             backgroundColor: Colors.LightGrey,
-            borderWidth: isEditable ? 0.5 : 0,
+            borderWidth: editable ? 0.5 : 0,
           },
           style,
           isInFocus && styles.isInFocus,
           noBorder && {borderWidth: 0},
-          error && styles.errorContainer,
+          error?.length ? styles.errorContainer : null,
         ]}>
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
         <TextInput
           {...rest}
           autoCorrect={false}
           value={value}
-          placeholder={placeholder}
-          editable={isEditable}
+          editable={editable}
           style={[
             styles.input,
             inputStyle,
-            value.length && styles.activeinput,
+            value.length > 0 && styles.activeinput,
             customInputStyle,
           ]}
-          keyboardType={keyboardType}
-          maxLength={maxLength}
-          onChange={onChange}
-          onChangeText={onChangeText}
           placeholderTextColor={placeholderTextColor || Colors.Black}
           onFocus={handleFocus}
           secureTextEntry={secure}
@@ -133,7 +143,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: hp(14),
     backgroundColor: 'white',
-    height: hp(56),
+    height: wp(78),
     borderColor: Colors.LightGrey,
     borderRadius: hp(18),
 

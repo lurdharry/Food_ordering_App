@@ -53,10 +53,6 @@ export const CustomTabBar = ({state, descriptors, navigation}) => {
             return <Cart color={color} />;
           }
         };
-        // const Content = isFocused => {
-        //   return <View></View>;
-        // };
-
         return (
           <TouchableOpacity
             accessibilityRole="button"

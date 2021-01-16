@@ -1,0 +1,10 @@
+export const LightPurple: string = '#6E80B0';
+export const Black: string = '#18172B';
+export const Purple: string = '#6D61F2';
+export const White: string = '#FFFFFF';
+export const LightGrey: string = '#F8F8FA';
+export const Grey100: string = '#6E80B0';
+export const dotColor: any = 'rgba(110, 128, 176, 0.2)';
+export const yellow: string = '#FDE901';
+export const green100: string = '#57CE96';
+export const brown100: string = '#9A7C48';

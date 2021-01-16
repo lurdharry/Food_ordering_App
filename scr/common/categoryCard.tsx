@@ -1,14 +1,33 @@
-import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {ReactNode} from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  TouchableOpacityProps,
+} from 'react-native';
 import * as Colors from './colors';
 import {hp, wp} from './utils';
 import {MediumText} from './text';
 
-const CategoryCard = ({Icon, title, onPress, selected}) => (
+interface typeCardProps extends TouchableOpacityProps {
+  title: string;
+  selected?: boolean;
+}
+
+interface catCardProps extends typeCardProps {
+  Icon: ReactNode;
+}
+
+const CategoryCard: React.FC<catCardProps> = ({
+  Icon,
+  title,
+  selected,
+  ...props
+}) => (
   <View style={styles.container}>
     <TouchableOpacity
-      style={[styles.itemView, selected && {backgroundColor: Colors.Purple}]}
-      onPress={onPress}>
+      {...props}
+      style={[styles.itemView, selected && {backgroundColor: Colors.Purple}]}>
       {Icon}
     </TouchableOpacity>
     <MediumText
@@ -18,13 +37,22 @@ const CategoryCard = ({Icon, title, onPress, selected}) => (
   </View>
 );
 
-const TypesCard = ({onPress, selected, title}) => (
+const TypesCard: React.FC<typeCardProps> = ({
+  title,
+  selected,
+  style,
+  ...props
+}) => (
   <TouchableOpacity
-    style={[styles.typeView, selected && {backgroundColor: Colors.Purple}]}
-    onPress={onPress}>
+    style={[
+      styles.typeView,
+      selected && {backgroundColor: Colors.Purple},
+      style,
+    ]}
+    {...props}>
     <MediumText
-      style={[styles.typeText, selected && {color: Colors.White}]}
       title={title}
+      style={[styles.typeText, selected && {color: Colors.White}]}
     />
   </TouchableOpacity>
 );

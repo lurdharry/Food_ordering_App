@@ -22,6 +22,7 @@ class Home extends Component {
 
   selectCategory = title => {
     this.setState({title});
+    console.log('title');
   };
 
   render() {
@@ -43,11 +44,13 @@ class Home extends Component {
                     title={item.title}
                     selected={selected}
                     Icon={selected ? item.selectedIcon : item.icon}
+                    // onPress={()=>}
                     onPress={() => this.selectCategory(item.title)}
                   />
                 );
               }}
               keyExtractor={(user, index) => index.toString()}
+              extraData={this.state}
             />
           </View>
           <PopularRow title="Popular Restaurents" />

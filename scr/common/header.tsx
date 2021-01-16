@@ -9,10 +9,22 @@ import {
 } from '../../assets/icons.svg/icon_svg';
 import * as Colors from './colors';
 import {BoldText} from './text';
+import {CompositeNavigationProp} from '@react-navigation/native';
 
-export const FavHeader = ({onFavPress, navigation, isFav}) => (
+interface props {
+  isFav?: boolean;
+  navigation?: () => void;
+  onFavPress?: () => void;
+}
+
+interface headerProps extends props {
+  title?: string;
+  noRight?: boolean;
+}
+
+export const FavHeader: React.FC<props> = ({isFav, navigation, onFavPress}) => (
   <View style={styles.headerView}>
-    <TouchableOpacity onPress={() => navigation.pop()}>
+    <TouchableOpacity onPress={navigation}>
       <BackIcon />
     </TouchableOpacity>
     <View style={styles.endView}>
@@ -24,9 +36,9 @@ export const FavHeader = ({onFavPress, navigation, isFav}) => (
   </View>
 );
 
-export const Header = ({navigation, title, noRight}) => (
+export const Header: React.FC<headerProps> = ({navigation, title, noRight}) => (
   <View style={styles.headerView}>
-    <TouchableOpacity onPress={() => navigation.pop()}>
+    <TouchableOpacity onPress={navigation}>
       <BackIcon />
     </TouchableOpacity>
     <BoldText title={title || 'Menu'} style={styles.title} />

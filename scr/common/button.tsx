@@ -5,7 +5,19 @@ import {hp, wp} from './utils';
 
 import * as Colors from './colors';
 
-const Button = ({
+interface props {
+  style: object;
+  buttonStyle: object;
+  disabled: boolean;
+  loading: boolean;
+  onPress: () => void;
+  title: string;
+  titleStyle: object;
+  icon: any;
+  iconRight: any;
+}
+
+const Button: React.FC<props> = ({
   style,
   buttonStyle,
   disabled,
@@ -15,23 +27,21 @@ const Button = ({
   titleStyle,
   icon,
   iconRight,
-}) => {
-  return (
-    <Btn
-      style={style}
-      icon={icon}
-      title={title}
-      buttonStyle={[styles.button, style, buttonStyle]}
-      loading={loading}
-      titleStyle={[styles.title, titleStyle]}
-      disabled={disabled}
-      disabledStyle={styles.disabledStyle}
-      disabledTitleStyle={styles.disabledTitleStyle}
-      onPress={onPress}
-      iconRight={iconRight}
-    />
-  );
-};
+}) => (
+  <Btn
+    style={style}
+    icon={icon}
+    title={title}
+    buttonStyle={[styles.button, style, buttonStyle]}
+    loading={loading}
+    titleStyle={[styles.title, titleStyle]}
+    disabled={disabled}
+    disabledStyle={styles.disabledStyle}
+    disabledTitleStyle={styles.disabledTitleStyle}
+    onPress={onPress}
+    iconRight={iconRight}
+  />
+);
 
 export {Button};
 
