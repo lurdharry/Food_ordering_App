@@ -28,7 +28,12 @@ export const intoSlides = [
   },
 ];
 
-export const SocialLogin = ({googleOnpress, fbOnpress}) => (
+interface socialProps {
+  googleOnpress?: () => void;
+  fbOnpress?: () => void;
+}
+
+export const SocialLogin = ({googleOnpress, fbOnpress}: socialProps) => (
   <View style={styles.socialContainer}>
     <TouchableOpacity style={styles.iconContainer} onPress={googleOnpress}>
       <Google />

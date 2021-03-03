@@ -10,7 +10,7 @@ import Login from './Auth/Login';
 import Home from './Home/home';
 import Details from './Home/Details';
 import Menu from './Menu/index';
-import Cart from './Cart/index';
+import Cart from './Cart/index.tsx';
 import BottomTabNavigator from './tabNav';
 const Stack = createStackNavigator();
 

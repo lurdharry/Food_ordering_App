@@ -6,6 +6,7 @@ import {Header, BoldText, hp, RegularText, wp, Button} from '../../common';
 import * as Colors from '../../common/colors';
 import {AddressCard, CartItem} from './utils';
 import {addItemToCart, removeFromCart} from '../../store/actions';
+import {data} from '../../types';
 
 class Cart extends Component {
   addTocart = item => {
@@ -15,7 +16,7 @@ class Cart extends Component {
   removeFromCart = item => {
     this.props.removeFromCart(item);
   };
-  _renderItem = ({item}) => {
+  _renderItem = ({item}: {item: data}) => {
     return (
       <CartItem
         name={item.name}
@@ -75,7 +76,11 @@ class Cart extends Component {
               style={styles.Total}
             />
           </View>
-          <Button title="Continue" buttonStyle={styles.button} />
+          <Button
+            title="Continue"
+            buttonStyle={styles.button}
+            onPress={() => console.log('bbb')}
+          />
         </View>
       </>
     );

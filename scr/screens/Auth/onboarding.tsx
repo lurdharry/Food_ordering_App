@@ -24,6 +24,7 @@ import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 import {onboard1, onboard2, onboard3} from '../../../assets/images';
 import {finishedOnboarding} from '../../store/actions';
+import {types} from '@babel/core';
 
 const data = [
   {
@@ -47,12 +48,39 @@ const data = [
     image: onboard3,
   },
 ];
-class Onboarding extends Component {
-  state = {
+const mapStateToProps = (state: any) => {
+  const {finshedOnboarding} = state.appReducer;
+  return {
+    finished: finshedOnboarding,
+  };
+};
+
+const mapDispatchToProps: any = {
+  finishedOnboarding,
+};
+
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> & {
+    label: string;
+  };
+
+interface MyState {
+  state: number;
+}
+
+class Onboarding extends Component<Props, MyState> {
+  slider: any;
+
+  constructor(props: Props) {
+    super(props);
+    this.slider = React.createRef();
+  }
+
+  readonly state: MyState = {
     state: 0,
   };
 
-  _renderItems = ({item}) => (
+  _renderItems = ({item}: any) => (
     <View style={styles.itemView}>
       <Image
         source={item.image}
@@ -85,12 +113,14 @@ class Onboarding extends Component {
     return 'Get Started';
   };
 
-  onSlideChange = start => {
+  onSlideChange = (start: number) => {
     this.setState({state: start});
   };
   finshed = () => {
     this.props.finishedOnboarding(true);
   };
+
+  // this.slider = React.createRef();
 
   render() {
     return (
@@ -120,17 +150,6 @@ class Onboarding extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  const {finshedOnboarding} = state.appReducer;
-  return {
-    finished: finshedOnboarding,
-  };
-};
-
-const mapDispatchToProps = {
-  finishedOnboarding,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Onboarding);
 

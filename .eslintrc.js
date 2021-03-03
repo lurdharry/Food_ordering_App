@@ -6,6 +6,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'prettier',
+    '@callstack',
   ],
   parser: 'babel-eslint',
   parserOptions: {
@@ -24,7 +25,8 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-console': 1,
     'no-underscore-dangle': 0,
-    'global-require': 'off',
+    'global-require': 0,
+    'prefer-destructuring': 0,
     camelcase: 0,
     quotes: ['error', 'single'],
     'react/no-unescaped-entities': 0,

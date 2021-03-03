@@ -1,9 +1,18 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationProp,
+} from '@react-navigation/bottom-tabs';
 import Home from './Home/home';
 import {CustomTabBar} from '../common';
 
-const Tab = createBottomTabNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  Search: undefined;
+  Cart: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 const BottomTabNavigator = () => {
   return (

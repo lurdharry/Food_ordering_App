@@ -23,8 +23,8 @@ interface props extends TextInputProps {
   labelStyle?: TextStyle | TextStyle[];
   editable?: boolean;
   value: string;
-  onBlur: () => void;
-  onFocus: () => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
   inputContainerStyle?: object;
   inputStyle?: object;
   isPass?: boolean;

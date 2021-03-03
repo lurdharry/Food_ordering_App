@@ -15,21 +15,30 @@ import {
 import * as Colors from '../../common/colors';
 import {SocialLogin} from './utils';
 
+interface IntialState {
+  email: string;
+  password: string;
+  emailEror: '';
+  disabled: boolean;
+}
+
 class Login extends Component {
-  state = {
+  state: IntialState = {
     email: '',
     password: '',
     emailEror: '',
     disabled: true,
   };
 
-  handleChange = (state, value) => {
-    this.setState({[state]: value}, this.validateInput);
+  handleChange = (state: string, value: string) => {
+    this.setState({[state]: value}, () => {
+      this.validateInput();
+    });
   };
 
   validateInput = () => {
     const {password, emailEror} = this.state;
-    if (emailEror.length || password.length < 6) {
+    if (emailEror.length > 0 || password.length < 6) {
       this.setState({disabled: true});
     } else this.setState({disabled: false});
   };
@@ -38,7 +47,7 @@ class Login extends Component {
     navigate(this, 'home');
   };
 
-  validateEmail = email => {
+  validateEmail = (email: string) => {
     if (emailValidator(email)) {
       this.setState({emailEror: ''});
     } else this.setState({emailEror: 'Invalid Email'});
@@ -96,7 +105,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   const {finshedOnboarding, cart} = state.appReducer;
   return {
     finished: finshedOnboarding,
